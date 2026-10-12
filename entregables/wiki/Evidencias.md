@@ -135,13 +135,13 @@ resultado que los logs locales: verde → rojo (compilación) → rojo (pruebas)
 
 | Ejecución | Commit | Resultado |
 |---|---|---|
-| [CI #1](https://github.com/EthianWhor/DAYS-Integracion_continua/actions/runs/38200167987) | `e96e674` | 🟢 |
-| [CI #2](https://github.com/EthianWhor/DAYS-Integracion_continua/actions/runs/38200201024) | `e8f63ca` | 🔴 compilación |
-| [CI #3](https://github.com/EthianWhor/DAYS-Integracion_continua/actions/runs/38200226468) | `15c0464` | 🔴 `Tests run: 16, Failures: 4` |
-| [CI #4](https://github.com/EthianWhor/DAYS-Integracion_continua/actions/runs/38200264537) | `29c1177` | 🟢 |
-| [CI #5](https://github.com/EthianWhor/DAYS-Integracion_continua/actions/runs/38200308163) | `4833d32` | 🔴 cobertura 0.74 |
-| [CI #6](https://github.com/EthianWhor/DAYS-Integracion_continua/actions/runs/38200334070) | `32b25d8` | 🟢 |
-| [CI #9](https://github.com/EthianWhor/DAYS-Integracion_continua/actions/runs/38200397687) | `7c16737` (PR #1) | 🔴 `Tests run: 26, Failures: 1` |
+| [CI #1](https://github.com/EthianWhor/DAYS-Integracion_continua/actions/runs/38203958876) | `e96e674` | 🟢 |
+| [CI #2](https://github.com/EthianWhor/DAYS-Integracion_continua/actions/runs/38203991911) | `e8f63ca` | 🔴 compilación |
+| [CI #3](https://github.com/EthianWhor/DAYS-Integracion_continua/actions/runs/38204021196) | `15c0464` | 🔴 `Tests run: 16, Failures: 4` |
+| [CI #4](https://github.com/EthianWhor/DAYS-Integracion_continua/actions/runs/38204052785) | `29c1177` | 🟢 |
+| [CI #5](https://github.com/EthianWhor/DAYS-Integracion_continua/actions/runs/38204088611) | `4833d32` | 🔴 cobertura 0.74 |
+| [CI #6](https://github.com/EthianWhor/DAYS-Integracion_continua/actions/runs/38204129936) | `32b25d8` | 🟢 |
+| [CI #9](https://github.com/EthianWhor/DAYS-Integracion_continua/actions/runs/38204210551) | `7c16737` (PR #1) | 🔴 `Tests run: 26, Failures: 1` |
 
 Resumen de una ejecución en verde con el artefacto **`reportes`** (51.2 KB) publicado:
 
