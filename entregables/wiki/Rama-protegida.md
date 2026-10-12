@@ -39,13 +39,10 @@ Detalle de sus reglas según la API:
 2. Pull Request `prueba-rama-protegida → main` (PR #1).
 3. El pipeline corre dos veces (evento `push` de la rama y evento `pull_request`) y **ambas fallan**:
 
-Vista del PR con la sesión del dueño del repositorio: GitHub lo marca con **Checks failing** y el commit `7c16737` con ❌.
-
-![PR #1 con Checks failing](images/gh-08-pr1-checks-failing.png)
-
-En el cuadro de merge del PR: **All checks have failed**, y los dos checks `CI / Build, pruebas y cobertura`
-(`pull_request` y `push`) aparecen marcados como **Required**, es decir, exigidos por el ruleset `proteger-main`.
-Mientras estén en rojo, el PR no se puede integrar.
+Vista del PR con la sesión del dueño del repositorio: GitHub lo marca con **Checks failing** y el commit `7c16737`
+con ❌. En el cuadro de merge aparece **All checks have failed**: los dos checks `CI / Build, pruebas y cobertura`
+(`pull_request` y `push`) están marcados como **Required**, es decir, exigidos por el ruleset `proteger-main`, y el
+botón **Merge pull request** queda **deshabilitado**.
 
 ![PR #1: All checks have failed, checks Required](images/gh-10-pr1-checks-required.png)
 
@@ -60,10 +57,12 @@ Mientras estén en rojo, el PR no se puede integrar.
 4. GitHub marca el PR como **`BLOCKED`**: no tiene conflictos (`MERGEABLE`), pero el ruleset impide integrarlo porque el
    check requerido está en rojo; el botón **Merge pull request** queda deshabilitado. El PR se deja abierto como evidencia.
 
-Comparación con el [PR #2](https://github.com/EthianWhor/DAYS-Integracion_continua/pull/2) (actualización de
-`integrantes.txt`), que siguió el flujo correcto: rama → PR → check en verde → merge.
+Estado del PR #1 según la API, comparado con `main`, cuyo último commit pasó el pipeline en verde:
 
-![PR #1 bloqueado vs PR #2 integrado](images/gh-07-pr-bloqueado-api.png)
+![PR #1 bloqueado vs main en verde](images/gh-07-pr-bloqueado-api.png)
+
+En cambio, el [PR #2](https://github.com/EthianWhor/DAYS-Integracion_continua/pull/2), que agrega estas evidencias de
+GitHub a la documentación, siguió el flujo correcto: rama → PR → check en verde → merge.
 
 Log del mismo fallo reproducido localmente:
 
