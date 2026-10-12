@@ -19,7 +19,7 @@ entregables/
 │   ├─ Rama-protegida.md          #   ruleset proteger-main y PR bloqueado
 │   ├─ Reflexion-final.md         #   respuestas a las 4 preguntas + aprendizajes
 │   ├─ _Sidebar.md
-│   └─ images/                    #   11 capturas (logs de cada paso y reportes JaCoCo)
+│   └─ images/                    #   20 capturas (logs de cada paso, reportes JaCoCo y evidencias de GitHub)
 ├─ evidencias/logs/               # log completo de `mvn -B clean verify` de cada commit
 ├─ reportes/
 │   ├─ jacoco-rojo-paso4/         # reporte HTML de cobertura con concepto() sin pruebas (74 %)
