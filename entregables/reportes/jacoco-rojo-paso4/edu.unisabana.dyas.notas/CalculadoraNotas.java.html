@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CalculadoraNotas.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Taller de Integración Continua - Calculadora de notas</a> &gt; <a href="index.source.html" class="el_package">edu.unisabana.dyas.notas</a> &gt; <span class="el_source">CalculadoraNotas.java</span></div><h1>CalculadoraNotas.java</h1><pre class="source lang-java linenums">package edu.unisabana.dyas.notas;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+/**
+ * Calcula la nota definitiva de una asignatura con tres cortes (30% - 30% - 40%).
+ *
+ * Reglas:
+ * - Cada nota debe estar entre 0.0 y 5.0.
+ * - La definitiva se redondea a una cifra decimal (mitad hacia arriba).
+ * - Se aprueba con una definitiva mayor o igual a 3.0.
+ */
+<span class="fc" id="L14">public class CalculadoraNotas {</span>
+
+<span class="fc" id="L16">    static final BigDecimal NOTA_MINIMA = new BigDecimal(&quot;0.0&quot;);</span>
+<span class="fc" id="L17">    static final BigDecimal NOTA_MAXIMA = new BigDecimal(&quot;5.0&quot;);</span>
+<span class="fc" id="L18">    static final BigDecimal NOTA_APROBATORIA = new BigDecimal(&quot;3.0&quot;);</span>
+
+<span class="fc" id="L20">    private static final BigDecimal PESO_CORTE_1 = new BigDecimal(&quot;0.30&quot;);</span>
+<span class="fc" id="L21">    private static final BigDecimal PESO_CORTE_2 = new BigDecimal(&quot;0.30&quot;);</span>
+<span class="fc" id="L22">    private static final BigDecimal PESO_CORTE_3 = new BigDecimal(&quot;0.40&quot;);</span>
+
+    public double calcularDefinitiva(double corte1, double corte2, double corte3) {
+<span class="fc" id="L25">        BigDecimal definitiva = validar(corte1, &quot;corte 1&quot;).multiply(PESO_CORTE_1)</span>
+<span class="fc" id="L26">                .add(validar(corte2, &quot;corte 2&quot;).multiply(PESO_CORTE_2))</span>
+<span class="fc" id="L27">                .add(validar(corte3, &quot;corte 3&quot;).multiply(PESO_CORTE_3));</span>
+        // BigDecimal evita errores de punto flotante: con double, 3.05 puede quedar en 3.0499999...
+<span class="fc" id="L29">        return definitiva.setScale(1, RoundingMode.HALF_UP).doubleValue();</span>
+    }
+
+    public boolean aprueba(double definitiva) {
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        return validar(definitiva, &quot;definitiva&quot;).compareTo(NOTA_APROBATORIA) &gt;= 0;</span>
+    }
+
+    /**
+     * Nota mínima que se necesita en el tercer corte para aprobar, redondeada hacia arriba a una décima.
+     *
+     * @throws IllegalStateException si se necesitaría más de 5.0 (ya no es posible aprobar)
+     */
+    public double notaNecesariaTercerCorte(double corte1, double corte2) {
+<span class="fc" id="L42">        BigDecimal faltante = NOTA_APROBATORIA</span>
+<span class="fc" id="L43">                .subtract(validar(corte1, &quot;corte 1&quot;).multiply(PESO_CORTE_1))</span>
+<span class="fc" id="L44">                .subtract(validar(corte2, &quot;corte 2&quot;).multiply(PESO_CORTE_2));</span>
+        // Hacia arriba: con 2.775 se necesita 2.8; con 2.7 no alcanzaría para aprobar.
+<span class="fc" id="L46">        BigDecimal necesaria = faltante.divide(PESO_CORTE_3, 1, RoundingMode.CEILING);</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        if (necesaria.compareTo(NOTA_MAXIMA) &gt; 0) {</span>
+<span class="fc" id="L48">            throw new IllegalStateException(</span>
+                    &quot;Ya no es posible aprobar: se necesitaría &quot; + necesaria + &quot; en el tercer corte&quot;);
+        }
+<span class="fc" id="L51">        return necesaria.max(NOTA_MINIMA).doubleValue();</span>
+    }
+
+    public String concepto(double definitiva) {
+<span class="nc" id="L55">        BigDecimal nota = validar(definitiva, &quot;definitiva&quot;);</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if (nota.compareTo(new BigDecimal(&quot;4.5&quot;)) &gt;= 0) {</span>
+<span class="nc" id="L57">            return &quot;Excelente&quot;;</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        } else if (nota.compareTo(new BigDecimal(&quot;4.0&quot;)) &gt;= 0) {</span>
+<span class="nc" id="L59">            return &quot;Sobresaliente&quot;;</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        } else if (nota.compareTo(NOTA_APROBATORIA) &gt;= 0) {</span>
+<span class="nc" id="L61">            return &quot;Aprobado&quot;;</span>
+        }
+<span class="nc" id="L63">        return &quot;Reprobado&quot;;</span>
+    }
+
+    private BigDecimal validar(double nota, String nombre) {
+<span class="fc" id="L67">        BigDecimal valor = BigDecimal.valueOf(nota);</span>
+<span class="fc bfc" id="L68" title="All 4 branches covered.">        if (valor.compareTo(NOTA_MINIMA) &lt; 0 || valor.compareTo(NOTA_MAXIMA) &gt; 0) {</span>
+<span class="fc" id="L69">            throw new IllegalArgumentException(</span>
+                    &quot;La nota del &quot; + nombre + &quot; debe estar entre 0.0 y 5.0, pero fue &quot; + nota);
+        }
+<span class="fc" id="L72">        return valor;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>

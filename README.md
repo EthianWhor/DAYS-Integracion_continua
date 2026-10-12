@@ -1,5 +1,7 @@
 # Taller de Integración Continua con GitHub Actions
 
+[![CI](https://github.com/EthianWhor/DAYS-Integracion_continua/actions/workflows/ci.yml/badge.svg)](https://github.com/EthianWhor/DAYS-Integracion_continua/actions/workflows/ci.yml)
+
 Este taller tiene como objetivo aprender a **configurar, ejecutar e interpretar un pipeline de Integración Continua (CI)** que, en cada commit, compile el proyecto, ejecute las pruebas automatizadas y **bloquee el cambio si la calidad no cumple el umbral acordado**.
 Es la base del pipeline que exige la **entrega 3 del proyecto del curso**, al que después se le agregan la construcción de la imagen Docker, los escaneos de seguridad y el despliegue.
 
