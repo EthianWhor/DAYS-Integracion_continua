@@ -1,0 +1,5 @@
+Taller de Integración Continua con GitHub Actions
+Diseño y Arquitectura de Software - Universidad de La Sabana - 2026-2
+
+Integrante (trabajo individual):
+- Ethian White (usuario GitHub: EthianWhor) - ethianwhor@unisabana.edu.co
